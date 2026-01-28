@@ -12,6 +12,22 @@ try {
     echo "Falha na conexão. Erro: " . $e->getMessage();
 }
 
+function registerUser($conn, $username, $email, $password) {
 
+try {
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    
+    $stmt->execute();
+
+    return $stmt->execute();
+} catch (PDOException $e) {
+    return "Erro ao registrar usuário: " . $e->getMessage();
+}
+
+}
 
 
