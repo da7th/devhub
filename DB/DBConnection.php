@@ -30,4 +30,14 @@ try {
 
 }
 
+function listUsers($conn) {
+    $stmt = $conn->prepare("SELECT * FROM users");
+
+    $stmt->execute();
+
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $users;
+}
+
 
